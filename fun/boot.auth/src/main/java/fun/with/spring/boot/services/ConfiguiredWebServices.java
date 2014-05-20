@@ -20,6 +20,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
+import fun.with.spring.boot.boundaries.ExternalService;
+import fun.with.spring.boot.impl.ExternalServiceImpl;
 import fun.with.spring.boot.root.CommandLineConstants;
 import fun.with.spring.boot.root.PrintConstants;
 
@@ -55,14 +57,14 @@ public class ConfiguiredWebServices {
 	}
 
 	/** The services. */
-	private List<Link> services = new LinkedList<Link>();
+	private List<ExternalService> services = new LinkedList<ExternalService>();
 
 	/**
 	 * Gets the services.
 	 *
 	 * @return the services
 	 */
-	public List<Link> getServices() {
+	public List<ExternalService> getServices() {
 		return services;
 
 	}
@@ -73,8 +75,8 @@ public class ConfiguiredWebServices {
 	 * @param link
 	 *            the link
 	 */
-	public void addLink(Link link) {
-		this.services.add(link);
+	public void addService(ExternalService service) {
+		this.services.add(service);
 	}
 
 	/**
@@ -98,12 +100,12 @@ public class ConfiguiredWebServices {
 	 * @param services
 	 *            the services
 	 */
-	private void printAllServices(List<Link> services) {
+	private void printAllServices(List<ExternalService> services) {
 		logger.info(MessageFormat.format(
 				"lets have a look at external web services: {0}",
 				EXTERNAL_WEB_SERVICES_PROPERTIES));
 		logger.info(PrintConstants.PRINT_DELIMETER);
-		for (Link link : services) {
+		for (ExternalService link : services) {
 			logger.info(MessageFormat.format("external service: {0} ", link));
 		}
 		logger.info(PrintConstants.PRINT_DELIMETER);
@@ -119,7 +121,8 @@ public class ConfiguiredWebServices {
 	private void createLinksToExternalWebservices(Properties properties) {
 		ArrayList<Object> list = Collections.list(properties.keys());
 		for (Object object : list) {
-			addLink(new Link(properties.getProperty((String) object)));
+			String serviceName = (String) object;
+			addService(new ExternalServiceImpl(serviceName, new Link(properties.getProperty( serviceName))));
 		}
 	}
 

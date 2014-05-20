@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fun.with.spring.boot.boundaries.Authentication;
+import fun.with.spring.boot.boundaries.ExternalService;
 import fun.with.spring.boot.boundaries.Token;
 import fun.with.spring.boot.services.ConfiguiredWebServices;
 
@@ -35,9 +36,9 @@ public class AuthController implements Authentication {
 	@ResponseBody
 	public HttpEntity<String> test() {
 
-		List<Link> services = configuration.getServices();
-		for (Link link : services) {
-			System.out.println(link.toString());
+		List<ExternalService> services = configuration.getServices();
+		for (ExternalService service : services) {
+			System.out.println(service.toString());
 		}
 		
 		return new ResponseEntity<String>("test", HttpStatus.OK);
