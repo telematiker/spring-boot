@@ -38,7 +38,12 @@ public class ConfiguiredWebServices {
 	private Logger logger = Logger.getLogger(ConfiguiredWebServices.class
 			.getName());
 
-	/** The external web services properties. Loads this from the command line arg: --{@link CommandLineConstants#EXTERNAL_WEB_SERVICE_PROPERTIES}=file:c:\some\file\props.properties*/
+	/**
+	 * The external web services properties. Loads this from the command line
+	 * arg: --{@link CommandLineConstants#EXTERNAL_WEB_SERVICE_PROPERTIES}
+	 * =file:c:\some\file\props.properties if you don't put properties in
+	 * program args they are taken from application.properties
+	 */
 	@Value("${" + CommandLineConstants.EXTERNAL_WEB_SERVICE_PROPERTIES + "}")
 	private String EXTERNAL_WEB_SERVICES_PROPERTIES = CommandLineConstants.DEFAULT_EXTERNAL_WEB_SERVICE_PROPERTIES;
 
