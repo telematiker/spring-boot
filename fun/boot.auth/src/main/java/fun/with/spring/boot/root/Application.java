@@ -2,6 +2,7 @@ package fun.with.spring.boot.root;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
@@ -11,7 +12,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,14 +30,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Application implements CommandLineRunner {
 
 	private static final String PRINT_DELIMETER = PrintConstants.PRINT_DELIMETER;
-	
-	/** The Constant COMMAND_LINE_ARGS. */
-	private static final String COMMAND_LINE_ARGS = "commandLineArgs";
 
 	/** The env. */
 	@Resource
 	Environment env;
-	
 
 	private static Logger logger = Logger
 			.getLogger(Application.class.getName());
@@ -59,8 +59,6 @@ public class Application implements CommandLineRunner {
 		ConfigurableApplicationContext ctx = SpringApplication.run(
 				Application.class, args);
 
-	
-
 		inspectBeans(ctx);
 
 		inspectEnvironment(ctx);
@@ -76,24 +74,50 @@ public class Application implements CommandLineRunner {
 	private static void inspectEnvironment(ConfigurableApplicationContext ctx) {
 		Environment env = ctx.getBean(Environment.class);
 		activeProfiles(env);
-		commandLineArgs(env);
+
+		if (env instanceof ConfigurableEnvironment) {
+			Iterator<PropertySource<?>> iterator = ((ConfigurableEnvironment) env)
+					.getPropertySources().iterator();
+			while (iterator.hasNext()) {
+				PropertySource<?> propertySource = (PropertySource<?>) iterator
+						.next();
+				if (propertySource instanceof EnumerablePropertySource) {
+					printProperties(propertySource.getName(),
+							(EnumerablePropertySource) propertySource);
+				} else {
+					printProperties(propertySource.getName(), propertySource);
+				}
+
+			}
+		}
+
 	}
 
-	
+	private static void printProperties(String commandLineArgs,
+			EnumerablePropertySource source) {
 
-	/**
-	 * Command line args.
-	 *
-	 * @param env
-	 *            the env
-	 */
-	private static void commandLineArgs(Environment env) {
-		String property = env.getProperty(COMMAND_LINE_ARGS);
-		logger.info("Look at command line args:");
-		printDelimeter();
-		logger.info(property);
+		logger.info(MessageFormat.format("Look at properties {0}:",
+				commandLineArgs));
 		printDelimeter();
 
+		String[] propertyNames = source.getPropertyNames();
+		for (int i = 0; i < propertyNames.length; i++) {
+			String name = propertyNames[i];
+			logger.info(MessageFormat.format("{0} --> {1}", name,source.getProperty(name)));
+		}
+
+		printDelimeter();
+	}
+
+	private static void printProperties(String commandLineArgs, PropertySource source) {
+
+		logger.info(MessageFormat.format("Look at properties {0}:",
+				commandLineArgs));
+		printDelimeter();
+
+		logger.info("Not enumerable "+source.getClass());
+
+		printDelimeter();
 	}
 
 	/**

@@ -45,6 +45,10 @@ public class ConfiguiredWebServices {
 	 * arg: --{@link CommandLineConstants#EXTERNAL_WEB_SERVICE_PROPERTIES}
 	 * =file:c:\some\file\props.properties if you don't put properties in
 	 * program args they are taken from application.properties
+	 * <br>
+	 * http://springinpractice.com/2008/12/02/new-stuff-in-spring-30/
+	 * <br>
+	 * http://docs.spring.io/spring-boot/docs/1.0.1.RELEASE/reference/html/boot-features-external-config.html
 	 */
 	@Value("${" + CommandLineConstants.EXTERNAL_WEB_SERVICE_PROPERTIES + "}")
 	private String EXTERNAL_WEB_SERVICES_PROPERTIES = CommandLineConstants.DEFAULT_EXTERNAL_WEB_SERVICE_PROPERTIES;
