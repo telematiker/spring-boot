@@ -28,7 +28,7 @@
 	</dependencies>
 
 	<properties>
-		<start-class>fun.with.spring.boot.auth.Application</start-class>
+		<start-class>fun.with.spring.boot.root.Application</start-class>
 	</properties>
 
 	<build>

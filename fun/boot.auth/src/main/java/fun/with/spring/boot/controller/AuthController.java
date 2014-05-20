@@ -1,4 +1,4 @@
-package fun.with.spring.boot.auth;
+package fun.with.spring.boot.controller;
 
 import java.util.List;
 
@@ -7,17 +7,19 @@ import org.springframework.hateoas.Link;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import fun.with.spring.boot.boundaries.Authentication;
+import fun.with.spring.boot.boundaries.Token;
+import fun.with.spring.boot.services.ConfiguiredWebServices;
 
 @RestController
 public class AuthController implements Authentication {
 
 	@Autowired
-	Services configuration;
+	ConfiguiredWebServices configuration;
 
 	@RequestMapping("/test")
 	@ResponseBody

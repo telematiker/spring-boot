@@ -1,4 +1,5 @@
-package fun.with.spring.boot.auth;
+package fun.with.spring.boot.boundaries;
+
 
 public interface Authentication {
 

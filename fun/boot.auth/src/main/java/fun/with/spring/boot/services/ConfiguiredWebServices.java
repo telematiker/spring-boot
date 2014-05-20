@@ -1,13 +1,19 @@
-package fun.with.spring.boot.auth;
+package fun.with.spring.boot.services;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 
-public class Services {
+@Service
+public class ConfiguiredWebServices {
 
-	public Services(){
+	@Autowired
+	private ArgumentService arguments;
+	
+	public ConfiguiredWebServices(){
 		
 	}
 	
