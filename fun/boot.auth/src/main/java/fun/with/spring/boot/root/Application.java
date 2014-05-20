@@ -17,22 +17,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fun.with.spring.boot.services.ArgumentService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Application.
+ */
 @Controller
 @EnableAutoConfiguration
 @ComponentScan(basePackages ={"fun.with.spring.boot"} )
 public class Application implements CommandLineRunner {
 
+	/** The Constant COMMAND_LINE_ARGS. */
 	private static final String COMMAND_LINE_ARGS = "commandLineArgs";
 
+	/** The env. */
 	@Resource
 	Environment env;
 
+	/**
+	 * Root.
+	 *
+	 * @return the string
+	 */
 	@RequestMapping("/")
 	@ResponseBody
 	String root() {
 		return Application.class.getName() + " is running!";
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(
 				Application.class, args);
@@ -46,12 +63,26 @@ public class Application implements CommandLineRunner {
 
 	}
 
+	/**
+	 * Inspect environment.
+	 *
+	 * @param ctx
+	 *            the ctx
+	 */
 	private static void inspectEnvironment(ConfigurableApplicationContext ctx) {
 		Environment env = ctx.getBean(Environment.class);
 		activeProfiles(env);
 		commandLineArgs(env);
 	}
 
+	/**
+	 * Register command line configuration.
+	 *
+	 * @param ctx
+	 *            the ctx
+	 * @param args
+	 *            the args
+	 */
 	private static void registerCommandLineConfiguration(
 			ConfigurableApplicationContext ctx, String[] args) {
 		ArgumentService bean = ctx.getBean(ArgumentService.class);
@@ -59,6 +90,12 @@ public class Application implements CommandLineRunner {
 		
 	}
 
+	/**
+	 * Command line args.
+	 *
+	 * @param env
+	 *            the env
+	 */
 	private static void commandLineArgs(Environment env) {
 		String property = env.getProperty(COMMAND_LINE_ARGS);
 		System.out.println("Look at command line args:");
@@ -68,6 +105,12 @@ public class Application implements CommandLineRunner {
 
 	}
 
+	/**
+	 * Active profiles.
+	 *
+	 * @param env
+	 *            the env
+	 */
 	private static void activeProfiles(Environment env) {
 		System.out.println("Look at the active profiles:");
 		printDelimeter();
@@ -86,6 +129,12 @@ public class Application implements CommandLineRunner {
 		printDelimeter();
 	}
 
+	/**
+	 * Inspect beans.
+	 *
+	 * @param ctx
+	 *            the ctx
+	 */
 	private static void inspectBeans(ConfigurableApplicationContext ctx) {
 		System.out.println("Let's inspect the beans provided by Spring Boot:");
 		printDelimeter();
@@ -97,12 +146,21 @@ public class Application implements CommandLineRunner {
 		printDelimeter();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.boot.CommandLineRunner#run(java.lang.String[])
+	 */
 	@Override
 	public void run(String... arg0) throws Exception {
 		printArgs(arg0);
 
 	}
 
+	/**
+	 * Prints the args.
+	 *
+	 * @param arg0
+	 *            the arg0
+	 */
 	private void printArgs(String... arg0) {
 		System.out.println(MessageFormat.format(
 				"run {1} with the following environment variables",
@@ -114,6 +172,9 @@ public class Application implements CommandLineRunner {
 		printDelimeter();
 	}
 
+	/**
+	 * Prints the delimeter.
+	 */
 	private static void printDelimeter() {
 		System.out.println("-------------------------------------------------");
 	}

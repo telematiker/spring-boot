@@ -2,6 +2,9 @@ package fun.with.spring.boot.services;
 
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * The Class ServicesConfiguration.
+ */
 @Configuration
 public class ServicesConfiguration {
 

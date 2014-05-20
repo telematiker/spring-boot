@@ -15,12 +15,22 @@ import fun.with.spring.boot.boundaries.Authentication;
 import fun.with.spring.boot.boundaries.Token;
 import fun.with.spring.boot.services.ConfiguiredWebServices;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthController.
+ */
 @RestController
 public class AuthController implements Authentication {
 
+	/** The configuration. */
 	@Autowired
 	ConfiguiredWebServices configuration;
 
+	/**
+	 * Test.
+	 *
+	 * @return the http entity
+	 */
 	@RequestMapping("/test")
 	@ResponseBody
 	public HttpEntity<String> test() {
@@ -33,12 +43,18 @@ public class AuthController implements Authentication {
 		return new ResponseEntity<String>("test", HttpStatus.OK);
 	}
 
+	/* (non-Javadoc)
+	 * @see fun.with.spring.boot.boundaries.Authentication#login(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Token login(String userIdentification, String hashedPassword) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see fun.with.spring.boot.boundaries.Authentication#validAccess(fun.with.spring.boot.boundaries.Token, java.lang.String)
+	 */
 	@Override
 	public Token validAccess(Token applicationToken, String applicationId) {
 		// TODO Auto-generated method stub
