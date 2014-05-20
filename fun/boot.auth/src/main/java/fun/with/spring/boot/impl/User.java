@@ -2,7 +2,7 @@ package fun.with.spring.boot.impl;
 
 import org.springframework.data.annotation.Id;
 
-import fun.with.spring.boot.controller.Credentials;
+import fun.with.spring.boot.boundaries.Credentials;
 
 public class User {
 

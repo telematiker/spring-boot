@@ -1,4 +1,4 @@
-package fun.with.spring.boot.controller;
+package fun.with.spring.boot.boundaries;
 
 // TODO: Auto-generated Javadoc
 /**

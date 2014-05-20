@@ -1,23 +1,33 @@
 package fun.with.spring.boot.services;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import com.github.fakemongo.Fongo;
+import com.mongodb.Mongo;
 
 /**
  * The Class ServicesConfiguration.
  */
 @Configuration
-public class ServicesConfiguration {
+@EnableMongoRepositories
+public class ServicesConfiguration extends AbstractMongoConfiguration {
 
-	// @Bean
-	// public ConfiguiredWebServices services() {
-	// ConfiguiredWebServices services = new ConfiguiredWebServices();
-	// return services;
-	// }
+	
+	
+	
 
-	// @Bean
-	// public ArgumentService arguments() {
-	// ArgumentService services = new ArgumentService();
-	// return services;
-	// }
+	@Override
+	protected String getDatabaseName() {
+		return "mongo_server_1";
+	}
+
+	@Override
+	public Mongo mongo() throws Exception {
+		return new Fongo(getDatabaseName()).getMongo();
+	}
+
+	
 
 }

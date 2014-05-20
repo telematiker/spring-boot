@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fun.with.spring.boot.boundaries.Authentication;
+import fun.with.spring.boot.boundaries.Credentials;
 import fun.with.spring.boot.boundaries.ExternalService;
 import fun.with.spring.boot.boundaries.Token;
 import fun.with.spring.boot.boundaries.UserRepository;
