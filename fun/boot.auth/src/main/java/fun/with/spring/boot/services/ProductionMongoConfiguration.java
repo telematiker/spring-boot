@@ -12,7 +12,7 @@ import fun.with.spring.boot.root.ProfileConstants;
 
 @Configuration(DataConstants.MONGO_CONFIGURATION)
 @Profile(ProfileConstants.PRODUCTION)
-public class DeploymentMongoConfiguration extends AbstractMongoConfiguration {
+public class ProductionMongoConfiguration extends AbstractMongoConfiguration {
 
 	@Autowired
 	private Mongo client;
