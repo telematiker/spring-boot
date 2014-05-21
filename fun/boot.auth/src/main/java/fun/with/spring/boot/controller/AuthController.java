@@ -40,7 +40,7 @@ public class AuthController implements Authentication {
 	 *
 	 * @return the http entity
 	 */
-	@RequestMapping("/test")
+	@RequestMapping(value ="/test", method = RequestMethod.GET)
 	@ResponseBody
 	public HttpEntity<String> test() {
 
@@ -52,7 +52,7 @@ public class AuthController implements Authentication {
 		List<User> findAll = userStorage.findAll();
 		String users = "";
 		for (User user : findAll) {
-			users+=users+"\n";
+			users+=user+"\n";
 		}
 		
 		
