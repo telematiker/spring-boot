@@ -22,19 +22,30 @@ import fun.with.spring.boot.boundaries.Token.Type;
 import fun.with.spring.boot.impl.TokenImpl;
 import fun.with.spring.boot.root.Application;
 
+// TODO: Auto-generated Javadoc
+
 /**
+ * The Class AuthControllerTest.
+ * 
  * http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/
  * #boot-features-testingy
  *
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:8080")
 public class AuthControllerTest {
 
+	/** The template. */
 	RestTemplate template = new TestRestTemplate();
 
+	/**
+	 * Gets the root test.
+	 *
+	 * @return the root test
+	 */
 	@Test
 	public void getRootTest() {
 		ResponseEntity<String> entity = template.getForEntity(
@@ -43,6 +54,9 @@ public class AuthControllerTest {
 		Assert.assertEquals(Application.APPLICATION_ROOT_MESSAGE, body);
 	}
 
+	/**
+	 * Register user test.
+	 */
 	@Test
 	public void registerUserTest() {
 		// ResponseEntity<Token> entity = template.getForEntity(
@@ -55,7 +69,8 @@ public class AuthControllerTest {
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
 		Credentials credentials = new Credentials("userId", "hashedPassword");
-		HttpEntity<Credentials> requestEntity = new HttpEntity<Credentials>(credentials, headers);
+		HttpEntity<Credentials> requestEntity = new HttpEntity<Credentials>(
+				credentials, headers);
 
 		ResponseEntity<TokenImpl> entity = template.postForEntity(
 				"http://127.0.0.1:8080/register", requestEntity,
