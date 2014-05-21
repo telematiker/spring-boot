@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,15 +59,28 @@ public class AuthController implements Authentication {
 		return new ResponseEntity<String>(users, HttpStatus.OK);
 	}
 	
-	@RequestMapping("/register")
-	@ResponseBody
-	public HttpEntity<Token> register(Credentials credentials){
-		if(userStorage.exists(credentials.getUserIdentification())){
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@ResponseBody	  
+	public HttpEntity<Token> register(@RequestBody  Credentials credentials){
+		String userIdentification = credentials.getUserIdentification();
+		if(userStorage.exists(userIdentification)){
 			return new ResponseEntity<Token>(HttpStatus.NOT_ACCEPTABLE);
 		}
-		userStorage.save(new User(credentials));
+		User entity = new User(credentials);
+		userStorage.save(entity);
 		
 		return new ResponseEntity<Token>(HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value = "/example", method = RequestMethod.GET)
+	@ResponseBody
+	public HttpEntity<Credentials> entityExample(){
+		Credentials body = new Credentials();
+		body.setHashedPassword("abc");
+		body.setUserIdentification("0131");
+		return new ResponseEntity<Credentials>(body, HttpStatus.OK);
+		
 		
 	}
 

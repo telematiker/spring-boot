@@ -11,7 +11,7 @@ import com.mongodb.Mongo;
  * The Class ServicesConfiguration.
  */
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = "fun.with.spring.boot.boundaries")
 public class ServicesConfiguration extends AbstractMongoConfiguration {
 
 	
