@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @EnableMongoRepositories(basePackages = "fun.with.spring.boot.boundaries")
 public class Application implements CommandLineRunner {
 
+	public static final String APPLICATION_ROOT_MESSAGE = Application.class.getName() + " is running!";
+
 	private static final String PRINT_DELIMETER = PrintConstants.PRINT_DELIMETER;
 
 	/** The env. */
@@ -48,7 +50,7 @@ public class Application implements CommandLineRunner {
 	@RequestMapping("/")
 	@ResponseBody
 	String root() {
-		return Application.class.getName() + " is running!";
+		return APPLICATION_ROOT_MESSAGE;
 	}
 
 	/**
