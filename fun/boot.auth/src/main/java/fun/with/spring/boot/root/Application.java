@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @EnableAutoConfiguration
 @ComponentScan(basePackages = { "fun.with.spring.boot" })
+@EnableMongoRepositories(basePackages = "fun.with.spring.boot.boundaries")
 public class Application implements CommandLineRunner {
 
 	private static final String PRINT_DELIMETER = PrintConstants.PRINT_DELIMETER;
