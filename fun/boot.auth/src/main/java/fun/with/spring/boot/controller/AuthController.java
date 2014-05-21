@@ -93,9 +93,8 @@ public class AuthController implements Authentication {
 	@RequestMapping(value = "/example", method = RequestMethod.GET)
 	@ResponseBody
 	public HttpEntity<Credentials> entityExample(){
-		Credentials body = new Credentials();
-		body.setHashedPassword("abc");
-		body.setUserIdentification("0131");
+		Credentials body = new Credentials("abc","0131");
+
 		return new ResponseEntity<Credentials>(body, HttpStatus.OK);
 		
 		

@@ -5,18 +5,23 @@ package fun.with.spring.boot.boundaries;
  * The Class Credentials.
  */
 public class Credentials {
-	
+
 	/** The user identification. */
 	public String userIdentification;
-	
+
 	/** The hashed password. */
 	public String hashedPassword;
 
 	/**
 	 * Instantiates a new credentials.
 	 */
-	public Credentials() {
+	Credentials() {
 		super();
+	}
+
+	public Credentials(String userIdentification, String hashedPassword) {
+		this.userIdentification = userIdentification;
+		this.hashedPassword = hashedPassword;
 	}
 
 	/**
@@ -56,7 +61,5 @@ public class Credentials {
 	public void setHashedPassword(String hashedPassword) {
 		this.hashedPassword = hashedPassword;
 	}
-	
-	
 
 }
