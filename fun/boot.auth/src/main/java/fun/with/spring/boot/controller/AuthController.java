@@ -18,7 +18,6 @@ import fun.with.spring.boot.boundaries.ExternalService;
 import fun.with.spring.boot.boundaries.Token;
 import fun.with.spring.boot.boundaries.UserRepository;
 import fun.with.spring.boot.impl.TokenFactory;
-import fun.with.spring.boot.impl.TokenImpl;
 import fun.with.spring.boot.impl.User;
 import fun.with.spring.boot.services.ConfiguiredWebServices;
 
