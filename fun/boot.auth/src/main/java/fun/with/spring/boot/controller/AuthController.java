@@ -17,6 +17,8 @@ import fun.with.spring.boot.boundaries.Credentials;
 import fun.with.spring.boot.boundaries.ExternalService;
 import fun.with.spring.boot.boundaries.Token;
 import fun.with.spring.boot.boundaries.UserRepository;
+import fun.with.spring.boot.impl.TokenFactory;
+import fun.with.spring.boot.impl.TokenImpl;
 import fun.with.spring.boot.impl.User;
 import fun.with.spring.boot.services.ConfiguiredWebServices;
 
@@ -34,6 +36,10 @@ public class AuthController implements Authentication {
 	/** The user storage. */
 	@Autowired
 	private UserRepository userStorage;	
+	
+	/** The factory. */
+	@Autowired
+	private TokenFactory factory;
 
 	/**
 	 * Test.
@@ -59,6 +65,13 @@ public class AuthController implements Authentication {
 		return new ResponseEntity<String>(users, HttpStatus.OK);
 	}
 	
+	/**
+	 * Register.
+	 *
+	 * @param credentials
+	 *            the credentials
+	 * @return the http entity
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	@ResponseBody	  
 	public HttpEntity<Token> register(@RequestBody  Credentials credentials){
@@ -69,10 +82,15 @@ public class AuthController implements Authentication {
 		User entity = new User(credentials);
 		userStorage.save(entity);
 		
-		return new ResponseEntity<Token>(HttpStatus.OK);
+		return new ResponseEntity<Token>(factory.generateToken(entity), HttpStatus.OK);
 		
 	}
 	
+	/**
+	 * Entity example.
+	 *
+	 * @return the http entity
+	 */
 	@RequestMapping(value = "/example", method = RequestMethod.GET)
 	@ResponseBody
 	public HttpEntity<Credentials> entityExample(){
